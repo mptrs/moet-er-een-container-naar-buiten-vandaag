@@ -1,0 +1,64 @@
+/*
+  Global App CSS
+  ----------------------
+  Use this file for styles that should be applied to all components.
+  For example, "font-family" within the "body" selector is a CSS property
+  most apps will want applied to all components.
+
+  Any global CSS variables should also be applied here.
+*/
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+footer {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  background: #000;
+  color: #fff;
+  padding: 0 1rem;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 6vh 1rem;
+  justify-content: center;
+}
+
+trash-data {
+  margin: 0;
+}
+
+@media only screen and (min-width: 690px) {
+  .layout {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1270px) {
+  .layout {
+    padding: 12vh 2rem;
+  }
+
+  trash-data {
+    margin: 4rem 0;
+  }
+
+  footer {
+    padding: 0;
+    text-align: center;
+  }
+}
