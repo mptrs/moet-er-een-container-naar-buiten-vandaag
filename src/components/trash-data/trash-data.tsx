@@ -22,7 +22,7 @@ export class TrashData {
     this.isLoading = true;
     setTimeout(() => {
       fetch(
-        `https://thingproxy.freeboard.io/fetch/https://www.rova.nl/api/waste-calendar/upcoming?postalcode=${this.postcodeInput.value.replace(' ', '')}&houseNumber=${
+        `https://www.rova.nl/api/waste-calendar/upcoming?postalcode=${this.postcodeInput.value.replace(' ', '')}&houseNumber=${
           this.huisnummerInput.value
         }`,
       )
