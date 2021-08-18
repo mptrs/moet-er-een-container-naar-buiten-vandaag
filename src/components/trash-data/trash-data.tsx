@@ -22,7 +22,7 @@ export class TrashData {
     this.isLoading = true;
     setTimeout(() => {
       fetch(
-        `https://broad-cherry-0038.mptrs.workers.dev/https://www.rova.nl/api/waste-calendar/upcoming?postalcode=${this.postcodeInput.value.replace(' ', '')}&houseNumber=${
+        `https://broad-cherry-0038.mptrs.workers.dev/?url=https://www.rova.nl/api/waste-calendar/upcoming%3Fpostalcode=${this.postcodeInput.value.replace(' ', '')}%26houseNumber=${
           this.huisnummerInput.value
         }`,
       )
