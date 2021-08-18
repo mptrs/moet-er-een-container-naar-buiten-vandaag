@@ -15,7 +15,7 @@ export class QuestionAnswer {
     this.answer = event.detail;
   }
 
-  @Listen('reset', { target: 'body' })
+  @Listen('resetContent', { target: 'body' })
   resetContent() {
     this.answer = null;
   }
@@ -33,6 +33,8 @@ export class QuestionAnswer {
             pak de {this.answer.garbageType} container maar!
           </h1>
         );
+      } else if (this.answer.message) {
+        headerContent = <h1>{this.answer.message}</h1>;
       } else {
         headerContent = <h1>Vandaag niet!!</h1>;
         extraContent = (

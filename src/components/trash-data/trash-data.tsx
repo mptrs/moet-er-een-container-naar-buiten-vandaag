@@ -12,14 +12,13 @@ export class TrashData {
   huisnummerInput: HTMLInputElement;
 
   @State() isLoading = false;
-  @State() errorMessage: string;
 
   @Event() answerReceived: EventEmitter<Answer>;
-  @Event() reset: EventEmitter;
+  @Event() resetContent: EventEmitter;
 
   getGarbageData(event: Event) {
     event.preventDefault();
-    this.reset.emit();
+    this.resetContent.emit();
     this.isLoading = true;
     setTimeout(() => {
       fetch(
@@ -34,15 +33,19 @@ export class TrashData {
           if (!parsedData || parsedData.length === 0 || parsedData.isError) {
             throw new Error(parsedData.exceptionMessage);
           }
-          this.errorMessage = null;
           this.answerReceived.emit({ today: this.dateIsTomorrow(parsedData[0].date), garbageType: parsedData[0].garbageType, nextTrashDate: this.nextDate(parsedData[0].date) });
           this.isLoading = false;
         })
         .catch(err => {
-          this.errorMessage = err.message;
+          this.handleError(err);
           this.isLoading = false;
         });
     }, 1000);
+  }
+
+  handleError(err) {
+    console.error(err.message);
+    this.answerReceived.emit({ message: 'Geen idee, even buiten checken?' });
   }
 
   dateIsTomorrow(date: Date): boolean {
@@ -64,12 +67,9 @@ export class TrashData {
   }
 
   render() {
-    let dataContent = null;
-    if (this.errorMessage) {
-      dataContent = <p>{this.errorMessage}</p>;
-    }
+    let buttonText = 'Moet ik lopen?';
     if (this.isLoading) {
-      dataContent = <p>Even geduld...</p>;
+      buttonText = 'Momentje...';
     }
     return (
       <Host>
@@ -88,9 +88,10 @@ export class TrashData {
             ref={el => (this.postcodeInput = el)}
           />
           <input type="text" required name="huisnummer" id="huisnummer" placeholder="Huisnummer" ref={el => (this.huisnummerInput = el)} />
-          <button type="submit">Moet ik lopen?</button>
+          <button type="submit" disabled={this.isLoading}>
+            {buttonText}
+          </button>
         </form>
-        {dataContent}
       </Host>
     );
   }

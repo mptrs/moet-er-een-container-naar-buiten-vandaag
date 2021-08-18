@@ -35,7 +35,7 @@ declare namespace LocalJSX {
     }
     interface TrashData {
         "onAnswerReceived"?: (event: CustomEvent<Answer>) => void;
-        "onReset"?: (event: CustomEvent<any>) => void;
+        "onResetContent"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "question-answer": QuestionAnswer;
